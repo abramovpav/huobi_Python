@@ -165,18 +165,16 @@ class TradeClient(object):
         return GetOrderByClientOrderIdService(params).request(**self.__kwargs)
 
     def get_orders(self, symbol: 'str', order_state: 'OrderState', order_type: 'OrderType' = None,
-                              start_date: 'str' = None, end_date: 'str' = None, start_id: 'int' = None,
+                              start_time: 'int' = None, end_time: 'int' = None, start_id: 'int' = None,
                               size: 'int' = None, direct=None) -> list:
         check_symbol(symbol)
         check_should_not_none(order_state, "order_state")
-        start_date = format_date(start_date, "start_date")
-        end_date = format_date(end_date, "end_date")
 
         params = {
             "symbol" : symbol,
             "types" : order_type,
-            "start-date" : start_date,
-            "end-date" : end_date,
+            "start-time" : start_time,
+            "end-time" : end_time,
             "from" : start_id,
             "states" : order_state,
             "size" :  size,
